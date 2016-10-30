@@ -9,10 +9,10 @@ from pprint import pprint
 import requests
 import re
 
-consumer_key = 'WFhIwINNkdMzqCoqWQ0LPPWQv'                              # Input consumer key
-consumer_secret = 'dHqdjaytedECJdGEO53obwNJCrgRdOdQQJBNXFyj6wHFiCKSwh'  # Input secret consumer key
-access_token = '541224109-okrdKk0fVZQstx7VWPhtqiNlJ5nTgzwPFhruacEz'     # Input access token
-access_token_secret = 'tAKkGeBYiB5QUXPiXtUe4KR9bYUkOK4IX0z9UCMWE833a'   # Input secret access token
+consumer_key = ''                                                       # Input consumer key
+consumer_secret = ''                                                    # Input secret consumer key
+access_token = ''                                                       # Input access token
+access_token_secret = ''                                                # Input secret access token
 
 auth = OAuthHandler(consumer_key, consumer_secret)                      # Input Twitter app credentials
 auth.set_access_token(access_token, access_token_secret)                # Initiate connection to Twitter bot
