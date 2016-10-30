@@ -1,4 +1,3 @@
-```python
 # Daily Population Bot
 # Follow on twitter @DailyPopulation
 # By Logicmn
@@ -52,4 +51,3 @@ def populationChange(todayPop):
         return(percent, popChange)
 
 main()
-```
