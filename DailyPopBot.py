@@ -25,7 +25,7 @@ def main():
         percent, popChange = populationChange(todayPop)                 # Find the percent change and population change from yesterday to today
         appendPop(todayPop)                                             # Add the population to a log file of all the past world populations
         twitterBot.update_status('Currently there are {0} people on earth. That is a {1} increase since yesterday!'.format(todayPop, popChange))
-        sleep(60)                                                    # Pause for 24 hours
+        sleep(86400)                                                    # Pause for 24 hours
 
 def worldPopulation():                                                  # Grab the worlds population in .json format by using a GET request
     x = requests.get('http://api.population.io:80/1.0/population/World/today-and-tomorrow/')
