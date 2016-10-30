@@ -2,6 +2,7 @@
 *A simple Twitter bot that posts the total world population and the percent change once a day.*
 
 **What this program does:**
+
 1. Pull the total world population from http://api.population.io/
 2. Calculate the percent change since the previous day
 3. Post to twitter
