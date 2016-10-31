@@ -19,8 +19,7 @@ auth.set_access_token(access_token, access_token_secret)                # Initia
 twitterBot = API(auth)
 
 def main():
-    i = True
-    while i == True:
+    while True:
         todayPop = worldPopulation()                                    # Define the current world population
         percent, popChange = populationChange(todayPop)                 # Find the percent change and population change from yesterday to today
         appendPop(todayPop)                                             # Add the population to a log file of all the past world populations
