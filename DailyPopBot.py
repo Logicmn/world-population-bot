@@ -2,6 +2,7 @@
 # Follow on twitter @DailyPopulation
 # By Logicmn
 
+from datetime import datetime, timedelta
 from random import randint
 from time import sleep
 from tweepy import OAuthHandler, API
@@ -22,31 +23,27 @@ def main():
     while True:
         todayPop = worldPopulation()                                    # Define the current world population
         percent, popChange = populationChange(todayPop)                 # Find the percent change and population change from yesterday to today
-        appendPop(todayPop)                                             # Add the population to a log file of all the past world populations
         twitterBot.update_status('Currently there are {0} people on earth. That is a {1} increase since yesterday!'.format(todayPop, popChange))
         sleep(86400)                                                    # Pause for 24 hours
 
 def worldPopulation():                                                  # Grab the worlds population in .json format by using a GET request
-    x = requests.get('http://api.population.io:80/1.0/population/World/today-and-tomorrow/')
+    x = requests.get('http://api.population.io/1.0/population/World/today-and-tomorrow/')
     world = x.json()
     worldPop = world['total_population']
     today = worldPop[0]
     todayPop = int(today['population'])                                 # Convert the population to an integer
     return todayPop
 
-def appendPop(todayPop):
-    with open("log.txt", "a") as logfile:
-        logfile.write("\n{0}".format(str(todayPop)))                    # Log every population
-
 def populationChange(todayPop):
-    with open('log.txt', "rb") as logfile:
-        logfile.seek(-20, 2)  # 2 means "from the end of the file"
-        lastLine = logfile.readlines()[-1]
-        lastPop = int("".join(map(chr, lastLine)))
-        percent = 100 * (1 - lastPop/todayPop)                          # Calculate the percent change
-        popChange = todayPop - lastPop                                  # Calculate the population change
-        print(lastPop, todayPop)
-        print(percent, popChange)
-        return(percent, popChange)
+    yesterday = datetime.today() - timedelta(days=1)
+    yesterday = yesterday.strftime('%Y-%m-%d')
+    r = requests.get('http://api.population.io/1.0/population/World/{}/'.format(yesterday))
+    result = r.json()
+    lastPop = int(result['total_population']['population'])     
+    percent = 100 * (1 - lastPop/float(todayPop))                              # Calculate the percent change
+    popChange = todayPop - lastPop                                      # Calculate the population change
+    print(lastPop, todayPop)
+    print(percent, popChange)
+    return(percent, popChange)
 
 main()
